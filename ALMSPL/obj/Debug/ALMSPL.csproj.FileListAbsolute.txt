@@ -43,3 +43,33 @@ D:\Capgemini\Project\Attendance and Leave Management\AttendanceLeaveMgmt\final p
 D:\Capgemini\Project\Attendance and Leave Management\AttendanceLeaveMgmt\final project\ALMS_Project\ALMSPL\bin\Debug\ALMSDAL.pdb
 D:\Capgemini\Project\Attendance and Leave Management\AttendanceLeaveMgmt\final project\ALMS_Project\ALMSPL\obj\Debug\ManagerHomePage.g.cs
 D:\Capgemini\Project\Attendance and Leave Management\AttendanceLeaveMgmt\final project\ALMS_Project\ALMSPL\obj\Debug\ManagerHomePage.baml
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSPL.exe.config
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSPL.exe
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSPL.pdb
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSBLL.dll
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSEntity.dll
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSException.dll
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSDAL.dll
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSBLL.pdb
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSEntity.pdb
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSException.pdb
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\bin\Debug\ALMSDAL.pdb
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.csprojAssemblyReference.cache
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\AdminHomePage.g.cs
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\EmployeeHomePage.g.cs
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\MainWindow.g.cs
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ManagerHomePage.g.cs
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\App.g.cs
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL_MarkupCompile.cache
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL_MarkupCompile.lref
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\AdminHomePage.baml
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\EmployeeHomePage.baml
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\MainWindow.baml
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ManagerHomePage.baml
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.g.resources
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.Properties.Resources.resources
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.csproj.GenerateResource.cache
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.csproj.CoreCompileInputs.cache
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.csproj.CopyComplete
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.exe
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.pdb

@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:ALMSPL"
         mc:Ignorable="d"
         Title="EmployeeHomePage" Height="450" Width="800">
-    <Grid Background="#FF96B0CD">
-        <Label Content="Welcome ..Employee Home Page" HorizontalAlignment="Left" Margin="141,153,0,0" VerticalAlignment="Top" Height="110" Width="434" FontSize="24"/>
-        <Button Content="Project" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="113" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909"/>
-        <Button Content="Attendance" HorizontalAlignment="Left" Margin="229,10,0,0" VerticalAlignment="Top" Width="203" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="Button_Click"/>
-        <Button Content="Leave" HorizontalAlignment="Left" Margin="539,10,0,0" VerticalAlignment="Top" Width="203" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909"/>
+    <Grid x:Name="EmployeeHomePage1" Background="#FF96B0CD">
+        <Label x:Name="EmployeeNameLabel" Content="Welcome ..Employee Home Page" HorizontalAlignment="Left" Margin="141,153,0,0" VerticalAlignment="Top" Height="48" Width="366" FontSize="24"/>
+        <Button Content="Project" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top" Width="113" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909"/>
+        <Button Content="Attendance" HorizontalAlignment="Left" Margin="226,84,0,0" VerticalAlignment="Top" Width="203" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="Button_Click"/>
+        <Button Content="Leave" HorizontalAlignment="Left" Margin="543,84,0,0" VerticalAlignment="Top" Width="203" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909"/>
 
     </Grid>
 </Window>

@@ -24,6 +24,12 @@ namespace ALMSPL
             InitializeComponent();
         }
 
+        private void MyWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // do work here
+            
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 

@@ -15,16 +15,26 @@ using System.Windows.Shapes;
 namespace ALMSPL
 {
     /// <summary>
-    /// Interaction logic for EmployeeHomePage.xaml
+    /// Interaction logic for ManagerHomePage.xaml
     /// </summary>
-    public partial class EmployeeHomePage : Window
+    public partial class ManagerHomePage : Window
     {
-        public EmployeeHomePage()
+        public ManagerHomePage()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
         }

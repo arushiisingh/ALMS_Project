@@ -16,5 +16,13 @@ namespace ALMSBLL
 
             return validateLogin;
         }
+
+        public bool IsManagerBLL(int userId)
+        {
+            bool isManager = loginDAL.IsManagerDAL(userId);
+            return isManager;
+        }
     }
+
+    
 }

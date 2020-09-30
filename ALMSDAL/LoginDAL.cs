@@ -10,8 +10,7 @@ namespace ALMSDAL
 {
     public class LoginDAL
     {
-        static string connectionString = @"Data Source=LAPTOP-261FR7PG\SQLEXPRESS;Initial Catalog=Project_DB;Integrated Security=True";
-        SqlConnection connection = new SqlConnection(connectionString);
+        SqlConnection connection = new SqlConnection(DALStatic.connectionString);
 
 
         public bool ValidateLoginDAL(int userId,string password,string userType)
@@ -87,6 +86,49 @@ namespace ALMSDAL
             {
                 Console.WriteLine(e);
             }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return false;
+        }
+
+        public bool IsManagerDAL(int userId)
+        {
+            Console.WriteLine("in manager DAL");
+            try
+            {
+                connection.Open();
+                Console.WriteLine("User type managerId checking");
+                string command = "Select Manager_ID from Employee where Manager_ID = @mId";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@mId", userId);
+                Console.WriteLine("sql command success");
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Console.WriteLine("In Reader");
+                    if (reader["Manager_ID"].ToString().Equals(userId.ToString()))
+                    {
+                        return true;
+                    }
+                    else
+                    { return false; }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
             finally
             {
                 if (connection.State == ConnectionState.Open)

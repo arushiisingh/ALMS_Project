@@ -27,6 +27,7 @@ insert into Employee  Values('passw', 'Amar  Kumar POddar', 'akpoddar@gmail.com'
 select * from Employee;
 
 drop table Employee_Project
+
 CREATE TABLE Employee_Project(
 	Employee_ID INT FOREIGN KEY references Employee(Employee_ID) ON DELETE SET NULL,
 	Project_ID INT FOREIGN KEY references Project(Project_ID) ON DELETE CASCADE,
@@ -37,6 +38,7 @@ INSERT into Employee_Project values(1001, 101, 1003),(1002,102, 1003);
 select * from Employee_Project;
 
 drop table Attendance
+
 CREATE TABLE Attendance(
 	Attendance_ID INT IDENTITY PRIMARY KEY NOT NULL,
 	Attedance_Type nvarchar(10) NOT NULL,
@@ -55,6 +57,7 @@ insert into Attendance values('P','2020-09-29','08:30','16:00','A', '2020-08-16'
 select * from Attendance;
 
 drop table Leave
+
 CREATE TABLE Leave(
 	Leave_Request_ID int IDENTITY PRIMARY KEY NOT NULL,
 	LeaveType NVARCHAR(30) NOT NULL,

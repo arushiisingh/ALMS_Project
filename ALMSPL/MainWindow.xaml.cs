@@ -64,14 +64,25 @@ namespace ALMSPL
                 string password = txtPassword.Password.ToString();
 
                 bool validateLogin = loginBLL.ValidateLoginBLL(userId, password, user);
-
+                
                 if (validateLogin)
                 {
                     if (user == "Employee")
                     {
-                        EmployeeHomePage employeeHomePage = new EmployeeHomePage();
-                        this.Close();
-                        employeeHomePage.Show();
+                        bool isManager = loginBLL.IsManagerBLL(userId);
+
+                        if (isManager)
+                        {
+                            ManagerHomePage managerHomePage = new ManagerHomePage();
+                            this.Close();
+                            managerHomePage.Show();
+                        }
+                        else
+                        {
+                            EmployeeHomePage employeeHomePage = new EmployeeHomePage();
+                            this.Close();
+                            employeeHomePage.Show();
+                        }
                     }
                     else if (user == "Admin")
                     {

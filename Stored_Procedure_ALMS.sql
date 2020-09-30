@@ -101,6 +101,7 @@ BEGIN
 	SELECT Project_ID, Project_Name, Project_StartDate, Project_EndDate from Project
 END
 GO
+
 exec spListProject;
 
 
@@ -236,13 +237,15 @@ select * from employee;
 
 CREATE PROCEDURE spDeleteEmployee
 	@eId int
+	
 AS
 BEGIN
 	SET NOCOUNT OFF;
+	
 	DELETE FROM Employee where Employee_ID = @eId;
 END
 GO
-
+drop procedure spDeleteEmployee;
 exec spDeleteEmployee 1002; 
 select * from employee;
 select * from Attendance;
@@ -306,9 +309,9 @@ exec spLoginEmployee 1002, asdasd;
 
 
 
+select * from leave;
 
 
 
-
-
-
+select * from admin;
+select * from Employee;

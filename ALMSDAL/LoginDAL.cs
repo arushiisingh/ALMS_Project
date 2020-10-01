@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ALMSEntity;
 namespace ALMSDAL
 {
     public class LoginDAL
@@ -21,7 +21,7 @@ namespace ALMSDAL
                 {
                     connection.Open();
                     Console.WriteLine("User type is employee verified");
-                    string command = "Select Employee_ID,Employee_Password from Employee where Employee_ID = @eId";
+                    string command = "Select Employee_ID, Employee_Password, Manager_ID from Employee where Employee_ID = @eId";
                     SqlCommand sqlCommand = new SqlCommand(command, connection);
                     sqlCommand.Parameters.AddWithValue("@eId", userId);
 
@@ -33,6 +33,7 @@ namespace ALMSDAL
                         {
                             if (reader["Employee_Password"].ToString().Equals(password.ToString()))
                             {
+                                LoginEntity.ManagerID = reader["Manager_ID"].ToString();
                                 return true;
                             }
                             else

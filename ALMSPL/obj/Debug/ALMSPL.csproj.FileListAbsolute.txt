@@ -73,3 +73,5 @@ C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.csproj.CoreCompileIn
 C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.csproj.CopyComplete
 C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.exe
 C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\ALMSPL.pdb
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\AddAttendance.g.cs
+C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\obj\Debug\AddAttendance.baml

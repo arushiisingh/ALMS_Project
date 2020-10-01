@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ALMSBLL;
+using ALMSEntity;
 
 namespace ALMSPL
 {
@@ -22,6 +23,8 @@ namespace ALMSPL
     public partial class MainWindow : Window
     {
         LoginBLL loginBLL = new LoginBLL();
+        LoginEntity loginEntity = new LoginEntity();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -67,6 +70,9 @@ namespace ALMSPL
                 
                 if (validateLogin)
                 {
+                    LoginEntity.UserID = userId;
+                    
+                    Console.WriteLine(LoginEntity.UserID);
                     if (user == "Employee")
                     {
                         bool isManager = loginBLL.IsManagerBLL(userId);
@@ -105,5 +111,7 @@ namespace ALMSPL
                 MessageBox.Show("Something went wrong....please try again ");
             }
         }
+
+
     }
 }

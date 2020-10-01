@@ -24,9 +24,12 @@ namespace ALMSPL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void Attedance_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddAttendance addAttendancePage = new AddAttendance();
+            this.Close();
+            addAttendancePage.Show();
         }
     }
 }

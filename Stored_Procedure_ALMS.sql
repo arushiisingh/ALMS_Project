@@ -107,73 +107,80 @@ exec spListProject;
 --Attendance Module.....................................................................................
 
 Create procedure spAddAttendance
-	@Attedance_Type nvarchar(10),
+	@Attedance_Type nvarchar(30),
 	@Attedance_Date DATE,
 	@In_Time TIME(0),
 	@Out_Time TIME(0),
-	@Status_Of_Attendance NVARCHAR(10),
-	@Status_Update_Date DATE,
-	@Status_Updated_By INT ,
+	@Status_Of_Attendance NVARCHAR(10) = 'Pending',
+	@Status_Update_Date DATE = NULL,
+	@Status_Updated_By INT = NULL ,
 	@Employee_ID INT,
-	@Manager_ID int 
+	@Manager_ID int =NULL 
 AS
 BEGIN
 	SET NOCOUNT OFF;
-	insert into Attendance values(@Attedance_Type,@Attedance_Date,@In_Time,@Out_Time,
-	@Status_Of_Attendance,@Status_Update_Date, @Status_Updated_By,@Employee_ID,@Manager_ID);
+	insert into Attendance values(@Attedance_Type, @Attedance_Date, @In_Time, @Out_Time,
+	@Status_Of_Attendance, @Status_Update_Date, @Status_Updated_By, @Employee_ID, @Manager_ID);
 END
 GO
  
- exec spAddAttendance 'aa','2020-08-08','20:00:00','20:00:00','gaa','2020-08-6',1001,1002,1001;
+ exec spAddAttendance 'Working From Home','01-10-2020','10:00:00','20:00:00',null,null,1003,null;
  select * from Attendance;
 
  /*-------------------------modify attendance------------------------*/
-
- Create procedure spModifyAttendance
-	@aId int,
-	@Attedance_Type nvarchar(10),
+ 
+ drop procedure spModifyAttendance
+ CREATE procedure spModifyAttendance
+	@Attedance_Type nvarchar(30),
 	@Attedance_Date DATE,
 	@In_Time TIME(0),
 	@Out_Time TIME(0),
-	@Status_Of_Attendance NVARCHAR(10),
-	@Status_Update_Date DATE,
-	@Status_Updated_By INT,
 	@Employee_ID INT,
-	@Manager_ID int 
+	@aId int
+
 as 
 BeGIN
  SET NOCOUNT OFF;
 	update Attendance set Attedance_Type = @Attedance_Type,
 	Attedance_Date= @Attedance_Date,
 	In_Time= @In_Time,
-	Out_Time= @Out_Time,
-	Status_Of_Attendance = @Status_Of_Attendance,
-	Status_Update_Date= @Status_Update_Date,
-	Status_Updated_By = @Status_Updated_By,
-	Employee_ID = @Employee_ID,
-	Manager_ID = @Manager_ID 
-	where Attendance_ID = @aId;
+	Out_Time= @Out_Time
+	where Attendance_ID = @aId and Employee_ID = @Employee_ID and Status_Of_Attendance = 'Pending';
  END
  
- exec spModifyAttendance @Attedance_Type ='aaa',@Attedance_Date='2020-08-08',@In_Time='20:00:00',
- @Out_Time='20:00:00',@Status_Of_Attendance='ga',@Status_Update_Date ='2020-08-06',
- @Status_Updated_By=1001, @Employee_ID=1002,
- @Manager_ID=1001 , @aId = 3;
+ exec spModifyAttendance @Attedance_Type = 'Business Travel', @Attedance_Date = '2020-09-08', 
+ @In_Time = '10:30:00', @Out_Time = '17:00:00', @aId = 2, @Employee_ID = 1003;
 
  select * from Attendance;
 
  /*---------------------delete Attendance---------------------------*/
 
- CREATE PROCEDURE spDeleteAttendance
-	@aId int
+CREATE PROCEDURE spDeleteAttendance
+	@aId int,
+	@eId int
 AS
 BEGIN
 	SET NOCOUNT OFF;
-	DELETE FROM Attendance where Attendance_ID = @aId;
+	DELETE FROM Attendance where Attendance_ID = @aId AND Employee_ID = @eId and Status_Of_Attendance = 'Pending';
 END
 GO
 
-exec spDeleteAttendance 3;
+exec spDeleteAttendance @aId = 1, @eId = 1002;
+select * from attendance;
+
+
+CREATE PROCEDURE spSearchAttendance
+	@aId int,
+	@eId int
+
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	SELECT * FROM Attendance where Attendance_ID = @aId and Employee_ID = @eId;
+END
+GO
+
+exec spSearchAttendance @aid = 2, @eId = 1003;
 select * from attendance;
 
 /*---------------------------------attandanceDetailsDisplay------------------------*/
@@ -190,6 +197,18 @@ GO
 exec spAttendanceDetailsDisplay ;
 
 
+
+CREATE PROCEDURE spListAttendanceDetailsDisplay
+	@eId int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	select * from Attendance where @eId = Employee_ID;
+END
+GO
+
+select * from Employee
+exec spListAttendanceDetailsDisplay @eId= 1004
 /*---------------------------------ApproveRejectAttendance--------------------------*/
 
 CREATE PROCEDURE spApproveRejectAttendanceRequest

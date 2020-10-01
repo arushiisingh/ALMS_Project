@@ -6,6 +6,9 @@ CREATE TABLE Project(
 	Project_Details NVARCHAR(300) NOT NULL	
 );
 
+select * from Employee;
+select * from Attendance;
+
 insert into Project  Values('xyz', '2020-09-29', '2020-10-23', 'all');
 insert into Project  Values('abc', '2020-09-29', '2021-12-03', 'alllllllll');
 select * from Project;
@@ -40,19 +43,19 @@ select * from Employee_Project;
 drop table Attendance
 CREATE TABLE Attendance(
 	Attendance_ID INT IDENTITY PRIMARY KEY NOT NULL,
-	Attedance_Type nvarchar(10) NOT NULL,
+	Attedance_Type nvarchar(30) NOT NULL,
 	Attedance_Date DATE NOT NULL,
 	In_Time TIME(0) NOT NULL,
 	Out_Time TIME(0) NOT NULL,
-	Status_Of_Attendance NVARCHAR(10) NOT NULL,
-	Status_Update_Date DATE NOT  NULL,
+	Status_Of_Attendance NVARCHAR(10) default 'Pending',
+	Status_Update_Date DATE ,
 	Status_Updated_By INT FOREIGN KEY references Employee(EMPLOYEE_ID) ,
 	Employee_ID INT FOREIGN KEY references Employee(EMPLOYEE_ID),
 	Manager_ID INT FOREIGN KEY references Employee(EMPLOYEE_ID)
 );
 
 insert into Attendance values('P','2020-09-29','08:30','16:00','A', '2020-08-16', 1001, 1002, 1001),
-('ASDDD','2020-11-29','09:30','18:00','P', '2020-07-16', 1001, 1003, 1001);
+('Business Travel','2020-11-29','09:30','18:00','P', '2020-07-16', 1001, 1003, 1001);
 select * from Attendance;
 
 drop table Leave

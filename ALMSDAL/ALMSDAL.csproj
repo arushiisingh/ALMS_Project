@@ -42,13 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminDAL.cs" />
-    <Compile Include="AttedanceDAL.cs" />
+    <Compile Include="AttendanceDAL.cs" />
     <Compile Include="DALStatic.cs" />
     <Compile Include="EmployeeDAL.cs" />
     <Compile Include="LeaveDAL.cs" />
     <Compile Include="LoginDAL.cs" />
     <Compile Include="ProjectDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ALMSEntity\ALMSEntity.csproj">
+      <Project>{3510223d-6f5d-47f1-b99f-316ce3a92aa4}</Project>
+      <Name>ALMSEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

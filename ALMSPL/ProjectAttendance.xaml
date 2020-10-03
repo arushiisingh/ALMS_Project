@@ -1,0 +1,32 @@
+﻿<Window x:Class="ALMSPL.ProjectAttendance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ALMSPL"
+        mc:Ignorable="d"
+        Title="ProjectAttendance" Height="450" Width="800" Background="#FF8CB6C3">
+    <Grid>
+        <Label Content="Project Attendance Details" HorizontalAlignment="Left" Margin="241,24,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="25"/>
+        <Label Content="Project ID" HorizontalAlignment="Left" Margin="27,87,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPId"  HorizontalAlignment="Left" Height="23" Margin="102,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <Button Content="Submit" Margin="273,87,383.6,0" VerticalAlignment="Top" Click="Attendance_Search_Click" Height="26" />
+
+        <TextBox x:Name="txtMonth"  HorizontalAlignment="Left" Height="23" Margin="466,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <Button Content="Search By Month" Margin="635,147,21.6,0" VerticalAlignment="Top" Click="AttendanceByMonth_Search_Click" Height="26" />
+
+        <Label Content="From Date" HorizontalAlignment="Left" Margin="465,65,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="To Date" HorizontalAlignment="Left" Margin="621,65,0,0" VerticalAlignment="Top"/>
+
+        <DatePicker Name="txtDateFrom"   HorizontalAlignment="Left" Margin="462,90,0,0" VerticalAlignment="Top" Height="26" Width="150" DisplayDate="2020-09-30" SelectedDateFormat="Short"/>
+        <DatePicker Name="txtDateTo"   HorizontalAlignment="Left" Margin="622,88,0,0" VerticalAlignment="Top" Height="26" Width="150" DisplayDate="2020-09-30" SelectedDateFormat="Short"/>
+
+        <Button Content="Search By Date" Margin="465,115,191.6,0" VerticalAlignment="Top" Click="AttendanceByDay_Search_Click" Height="26" />
+        <Button Content="Search Between Dates" Margin="631,115,25.6,0" VerticalAlignment="Top" Click="AttendanceBetweenDates_Search_Click" Height="26" />
+
+
+        <DataGrid HorizontalAlignment="Left" Height="242" Margin="12,174,0,0" VerticalAlignment="Top" Width="772" Name="dgProjectAttendance" ItemsSource="{Binding}"/>
+
+    </Grid>
+</Window>

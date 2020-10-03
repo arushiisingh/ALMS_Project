@@ -29,6 +29,7 @@ namespace ALMSPL
         {
             AddAttendance addAttendancePage = new AddAttendance();
             this.Close();
+            addAttendancePage.AttendanceApproveRejectBtn.Visibility = Visibility.Hidden;
             addAttendancePage.Show();
         }
     }

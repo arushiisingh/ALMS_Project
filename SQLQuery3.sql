@@ -13,6 +13,7 @@ insert into Project  Values('xyz', '2020-09-29', '2020-10-23', 'all');
 insert into Project  Values('abc', '2020-09-29', '2021-12-03', 'alllllllll');
 select * from Project;
 
+
 CREATE TABLE Employee(
 	Employee_ID INT IDENTITY(1001,1) PRIMARY KEY NOT NULL,
 	Employee_Name NVARCHAR(50) NOT NULL,
@@ -28,6 +29,8 @@ CREATE TABLE Employee(
 insert into Employee  Values('Amar', 'amarp@gmail.com','8989789168','Analyst','Active','password',null,101);
 insert into Employee  Values('Amar  Kumar', 'apoddark@gmail.com','838849568','Analyst A4','Inactive','pass',1001,102);
 insert into Employee  Values('Amar  Kumar POddar', 'akppoddar@gmail.com','8358849568','Analyst A5','Active','passw',1001,101);
+insert into Employee  Values('Amar AP', 'ap@gmail.com','8252849568','Analyst A4','Active','passw',1001,102);
+
 select * from Employee;
 
 drop table Employee_Project
@@ -51,11 +54,12 @@ CREATE TABLE Attendance(
 	Status_Update_Date DATE ,
 	Status_Updated_By INT FOREIGN KEY references Employee(EMPLOYEE_ID) ,
 	Employee_ID INT FOREIGN KEY references Employee(EMPLOYEE_ID),
-	Manager_ID INT FOREIGN KEY references Employee(EMPLOYEE_ID)
+	Manager_ID INT FOREIGN KEY references Employee(EMPLOYEE_ID),
+	Project_ID INT FOREIGN KEY references Project(Project_ID)
 );
 
-insert into Attendance values('P','2020-09-29','08:30','16:00','A', '2020-08-16', 1001, 1002, 1001),
-('Business Travel','2020-11-29','09:30','18:00','P', '2020-07-16', 1001, 1003, 1001);
+insert into Attendance values('P','2020-09-29','08:30','16:00','A', '2020-08-16', 1001, 1002, 1001,101),
+('Business Travel','2020-11-29','09:30','18:00','P', '2020-07-16', 1001, 1003, 1001,102);
 select * from Attendance;
 
 drop table Leave

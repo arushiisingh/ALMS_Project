@@ -26,17 +26,19 @@ namespace ALMSPL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            AddAttendance addAttendance = new AddAttendance();
+            addAttendance.Show();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Project_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectAttendance projectAttendance = new ProjectAttendance();
+            projectAttendance.Show();
         }
     }
 }

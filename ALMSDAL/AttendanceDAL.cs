@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using ALMSEntity;
 using System.Data;
+using System.Globalization;
 
 namespace ALMSDAL
 {
@@ -18,24 +19,84 @@ namespace ALMSDAL
             try
             {
                 connection.Open();
-                string command = "spAddAttendance";
+
+                string command = "spLeaveCheck";
                 SqlCommand sqlCommand = new SqlCommand(command, connection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@Attedance_Type", attendanceEntity.AttendanceType);
-                sqlCommand.Parameters.AddWithValue("@Attedance_Date", attendanceEntity.AttendanceDate);
-                sqlCommand.Parameters.AddWithValue("@In_Time", attendanceEntity.InTime);
-                sqlCommand.Parameters.AddWithValue("@Out_Time", attendanceEntity.OutTime);
-                sqlCommand.Parameters.AddWithValue("@Employee_ID", attendanceEntity.EmployeeID);
-                sqlCommand.Parameters.AddWithValue("@Manager_ID", LoginEntity.ManagerID);
-                int RowsAffected = sqlCommand.ExecuteNonQuery();
-                if (RowsAffected == 1)
+                string x = attendanceEntity.AttendanceDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                sqlCommand.Parameters.AddWithValue("@ADate", x);
+                sqlCommand.Parameters.AddWithValue("@eId", attendanceEntity.EmployeeID);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                int y = 1;
+                if (reader.Read())
                 {
-                    Console.WriteLine("Attendance Added Successfully.");
-                    isAttendanceAdded = true;
+                    y = 0; 
+                }
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+                if (y == 1)
+                {
+                    if (LoginEntity.ProjectID == attendanceEntity.ProjectID)
+                    {
+                        connection.Open();
+                        string command1 = "spAddAttendance";
+                        SqlCommand sqlCommand1 = new SqlCommand(command1, connection);
+                        sqlCommand1.CommandType = CommandType.StoredProcedure;
+                        sqlCommand1.Parameters.AddWithValue("@Attedance_Type", attendanceEntity.AttendanceType);
+                        sqlCommand1.Parameters.AddWithValue("@Attedance_Date", attendanceEntity.AttendanceDate);
+                        sqlCommand1.Parameters.AddWithValue("@In_Time", attendanceEntity.InTime);
+                        sqlCommand1.Parameters.AddWithValue("@Out_Time", attendanceEntity.OutTime);
+                        sqlCommand1.Parameters.AddWithValue("@Status_Of_Attendance", "Approved");
+                        sqlCommand1.Parameters.AddWithValue("@Status_Update_Date", attendanceEntity.AttendanceDate);
+                        sqlCommand1.Parameters.AddWithValue("@Status_Updated_By", LoginEntity.ManagerID);
+                        sqlCommand1.Parameters.AddWithValue("@Employee_ID", attendanceEntity.EmployeeID);
+                        sqlCommand1.Parameters.AddWithValue("@Manager_ID", LoginEntity.ManagerID);
+                        sqlCommand1.Parameters.AddWithValue("@Project_ID", LoginEntity.ProjectID);
+                        int RowsAffected = sqlCommand1.ExecuteNonQuery();
+                        if (RowsAffected == 1)
+                        {
+                            Console.WriteLine("Attendance Added Successfully.");
+                            isAttendanceAdded = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Project Code doesn't match.");
+                            isAttendanceAdded = false;
+                        }
+                    }
+                    else
+                    {
+                            connection.Open();
+                            string command1 = "spAddAttendance";
+                            SqlCommand sqlCommand1 = new SqlCommand(command1, connection);
+                            sqlCommand1.CommandType = CommandType.StoredProcedure;
+                            sqlCommand1.Parameters.AddWithValue("@Attedance_Type", attendanceEntity.AttendanceType);
+                            sqlCommand1.Parameters.AddWithValue("@Attedance_Date", attendanceEntity.AttendanceDate);
+                            sqlCommand1.Parameters.AddWithValue("@In_Time", attendanceEntity.InTime);
+                            sqlCommand1.Parameters.AddWithValue("@Out_Time", attendanceEntity.OutTime);
+                            sqlCommand1.Parameters.AddWithValue("@Employee_ID", attendanceEntity.EmployeeID);
+                            sqlCommand1.Parameters.AddWithValue("@Manager_ID", LoginEntity.ManagerID);
+                            sqlCommand1.Parameters.AddWithValue("@Project_ID", attendanceEntity.ProjectID);
+                            int RowsAffected = sqlCommand1.ExecuteNonQuery();
+                            if (RowsAffected == 1)
+                            {
+                                Console.WriteLine("Attendance Added Successfully.");
+                                isAttendanceAdded = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error Found");
+                                isAttendanceAdded = false;
+                            }
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Something went wrong.");
+                    Console.WriteLine("Leave is applied already");
                     isAttendanceAdded = false;
                 }
 
@@ -191,6 +252,51 @@ namespace ALMSDAL
             return isDeleted;
         }
 
+
+
+        public bool ApproveRejectAttendanceDAL(AttendanceEntity attendanceEntity)
+        {
+            bool isAttendanceUpdated = false;
+            DateTime dateTime = DateTime.Now;
+            try
+            {
+                connection.Open();
+                string command = "spApproveRejectPendingAttendance";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@aId", attendanceEntity.AttendanceID);
+                sqlCommand.Parameters.AddWithValue("@Status_Of_Attendance", attendanceEntity.StatusOfAttendance);
+                sqlCommand.Parameters.AddWithValue("@Status_Update_Date", dateTime.Date);
+                sqlCommand.Parameters.AddWithValue("@Status_Updated_By", LoginEntity.UserID);
+                
+                int RowsAffected = sqlCommand.ExecuteNonQuery();
+                if (RowsAffected == 1)
+                {
+                    Console.WriteLine("Pending Attendance Updated Successfully.");
+                    isAttendanceUpdated = true;
+                }
+                else
+                {
+                    Console.WriteLine("Pending Attendance Not Updated.");
+                    isAttendanceUpdated = false;
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return isAttendanceUpdated;
+        }
+
         public DataTable LoadGridDAL(int EmployeeID)
         {
 
@@ -226,5 +332,270 @@ namespace ALMSDAL
             }
             return dataTable;
         }
+
+
+        public DataTable LoadGridARDAL(int EmployeeID)
+        {
+
+            DataTable dataTable = new DataTable();
+            //Step2. Open the connection.
+            try
+            {
+                connection.Open();
+                //Step3. Create the command
+                string command = "spListPendingAttendance";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@mId", EmployeeID);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Step4. Run the command
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                //DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+
+                //dgAttendance.DataContext = dataTable;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine("Something Went Wrong...." + exception.Message);
+            }
+            //Step5. Close the connection
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+
+
+
+        public DataTable LoadGridPADAL(int ProjectID, int EmployeeID)
+        {
+
+            DataTable dataTable = new DataTable();
+            //Step2. Open the connection.
+            try
+            {
+                connection.Open();
+                //Step3. Create the command
+                string command = "spListProjectAttendance";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@pId", ProjectID);
+                sqlCommand.Parameters.AddWithValue("@mId", EmployeeID);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Step4. Run the command
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                //DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+
+                //dgAttendance.DataContext = dataTable;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine("Something Went Wrong...." + exception.Message);
+            }
+            //Step5. Close the connection
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+
+        public DataTable LoadGridPAMDAL(int ProjectID, int Month, int EmployeeID)
+        {
+
+            DataTable dataTable = new DataTable();
+            //Step2. Open the connection.
+            try
+            {
+                connection.Open();
+                //Step3. Create the command
+                string command = "spAttendanceSearchByMonth";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@pId", ProjectID);
+                sqlCommand.Parameters.AddWithValue("@month", Month);
+                sqlCommand.Parameters.AddWithValue("@mId", EmployeeID);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Step4. Run the command
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                //DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+
+                //dgAttendance.DataContext = dataTable;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine("Something Went Wrong...." + exception.Message);
+            }
+            //Step5. Close the connection
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+
+        public DataTable LoadGridPADDAL(int ProjectID, DateTime Date, int EmployeeID)
+        {
+
+            DataTable dataTable = new DataTable();
+            //Step2. Open the connection.
+            try
+            {
+                connection.Open();
+                //Step3. Create the command
+                string command = "spAttendanceSearchByDay";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@pId", ProjectID);
+                sqlCommand.Parameters.AddWithValue("@day", Date);
+                sqlCommand.Parameters.AddWithValue("@mId", EmployeeID);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Step4. Run the command
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                //DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+
+                //dgAttendance.DataContext = dataTable;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine("Something Went Wrong...." + exception.Message);
+            }
+            //Step5. Close the connection
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+        public DataTable LoadGridPABDDAL(int ProjectID, DateTime FromDate, DateTime ToDate, int EmployeeID)
+        {
+
+            DataTable dataTable = new DataTable();
+            //Step2. Open the connection.
+            try
+            {
+                connection.Open();
+                //Step3. Create the command
+                string command = "spAttendanceSearchBetweenDates";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@pId", ProjectID);
+                sqlCommand.Parameters.AddWithValue("@startDate", FromDate);
+                sqlCommand.Parameters.AddWithValue("@endDate", ToDate);
+                sqlCommand.Parameters.AddWithValue("@mId", EmployeeID);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Step4. Run the command
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                //DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+
+                //dgAttendance.DataContext = dataTable;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine("Something Went Wrong...." + exception.Message);
+            }
+            //Step5. Close the connection
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+
+        public DataTable LoadGridApprovedAttendanceDAL(int userID)
+        {
+
+            DataTable dataTable = new DataTable();
+            //Step2. Open the connection.
+            try
+            {
+                connection.Open();
+                //Step3. Create the command
+                string command = "spListApprovedAttendance";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@mId", userID);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Step4. Run the command
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                //DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+
+                //dgAttendance.DataContext = dataTable;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine("Something Went Wrong...." + exception.Message);
+            }
+            //Step5. Close the connection
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+
+
+
+        public DataTable LoadGridRejectedAttendanceDAL(int userID)
+        {
+
+            DataTable dataTable = new DataTable();
+            //Step2. Open the connection.
+            try
+            {
+                connection.Open();
+                //Step3. Create the command
+                string command = "spListRejectedAttendance";
+                SqlCommand sqlCommand = new SqlCommand(command, connection);
+                sqlCommand.Parameters.AddWithValue("@mId", userID);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                //Step4. Run the command
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                //DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+
+                //dgAttendance.DataContext = dataTable;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine("Something Went Wrong...." + exception.Message);
+            }
+            //Step5. Close the connection
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+
     }
 }

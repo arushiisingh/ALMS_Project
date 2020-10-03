@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\amarp\Desktop\Project\ALMS\ALMSPL\App.xaml
-5-1375661430
+7-1750728729
 
-10-1566635241
+121660297789
 17-484912168
-AddAttendance.xaml;AdminHomePage.xaml;EmployeeHomePage.xaml;MainWindow.xaml;ManagerHomePage.xaml;
+AddAttendance.xaml;AdminHomePage.xaml;AttendancePendingList.xaml;EmployeeHomePage.xaml;MainWindow.xaml;ManagerHomePage.xaml;ProjectAttendance.xaml;
 
-False
+True
 

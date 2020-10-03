@@ -11,24 +11,27 @@
             <ColumnDefinition Width="339*"/>
             <ColumnDefinition Width="455*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Attendance Details" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="25" Grid.ColumnSpan="2"/>
+        <Label Content="Attendance Details" HorizontalAlignment="Left" Margin="305,24,0,0" VerticalAlignment="Top" Foreground="Red" FontSize="25" Grid.ColumnSpan="2"/>
 
-        <Label Content="Employee ID" HorizontalAlignment="Left" Margin="27,91,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtEmpId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="170,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <Label Content="Employee ID" HorizontalAlignment="Left" Margin="27,107,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEmpId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="170,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
 
-        <Label Content="Attendance Type" HorizontalAlignment="Left" Margin="27,149,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="cmbAType" HorizontalAlignment="Left" Margin="170,152,0,0" VerticalAlignment="Top" Width="150">
+        <Label Content="Project ID" HorizontalAlignment="Left" Margin="27,150,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPId"  HorizontalAlignment="Left" Height="23" Margin="170,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+
+        <Label Content="Attendance Type" HorizontalAlignment="Left" Margin="27,191,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cmbAType" HorizontalAlignment="Left" Margin="170,192,0,0" VerticalAlignment="Top" Width="150">
             <ComboBoxItem Content="Select" IsSelected="True"/>
             <ComboBoxItem Content="Working From Office"/>
             <ComboBoxItem Content="Working From Home"/>
             <ComboBoxItem Content="Business Travel"/>
         </ComboBox>
-        <Label Content="Attendance Date" HorizontalAlignment="Left" Margin="27,205,0,0" VerticalAlignment="Top"/>
-        <DatePicker Name="txtDate"   HorizontalAlignment="Left" Margin="170,206,0,0" VerticalAlignment="Top" Height="26" Width="150" DisplayDate="2020-09-30" SelectedDateFormat="Short"/>
-        <Label Content="In-Time" HorizontalAlignment="Left" Margin="27,257,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="txtInTime" HorizontalAlignment="Left" Height="23" Margin="170,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <Label Content="Out-Time" HorizontalAlignment="Left" Margin="27,306,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.465,2.38"/>
-        <TextBox Name="txtOutTime" HorizontalAlignment="Left" Height="23" Margin="170,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <Label Content="Attendance Date" HorizontalAlignment="Left" Margin="27,233,0,0" VerticalAlignment="Top"/>
+        <DatePicker Name="txtDate"   HorizontalAlignment="Left" Margin="170,234,0,0" VerticalAlignment="Top" Height="26" Width="150" DisplayDate="2020-09-30" SelectedDateFormat="Short"/>
+        <Label Content="In-Time" HorizontalAlignment="Left" Margin="27,275,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txtInTime" HorizontalAlignment="Left" Height="23" Margin="170,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <Label Content="Out-Time" HorizontalAlignment="Left" Margin="27,316,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.465,2.38"/>
+        <TextBox Name="txtOutTime" HorizontalAlignment="Left" Height="23" Margin="170,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
 
         <Button Content="Add Attendance" HorizontalAlignment="Left" Margin="27,352,0,0" VerticalAlignment="Top" Width="120" Click="Add_Attendance_Click" Height="25" />
         <Button Content="Update Attendance" HorizontalAlignment="Left" Margin="170,355,0,0" VerticalAlignment="Top" Width="150" Click="Attendance_Update_Click" Height="20"/>
@@ -37,7 +40,8 @@
         <TextBox x:Name="txtAId" HorizontalAlignment="Left" Height="23" Margin="170,383,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" />
         <Button Content="Search Attendance" HorizontalAlignment="Left" Margin="11.905,387,0,0" VerticalAlignment="Top" Width="120" Click="Attendance_Search_Click" Grid.Column="1" />
 
-        <DataGrid HorizontalAlignment="Left" Height="250" Margin="11.905,84,0,0" VerticalAlignment="Top" Width="431" Name="dgAttendance" ItemsSource="{Binding}" Grid.Column="1"/>
+        <DataGrid HorizontalAlignment="Left" Height="226" Margin="11.8,108,0,0" VerticalAlignment="Top" Width="431" Name="dgAttendance" ItemsSource="{Binding}" Grid.Column="1"/>
+        <Button Content="Pending Requests" Name="AttendanceApproveRejectBtn" Grid.Column="1" HorizontalAlignment="Left" Margin="266.8,53,0,0" VerticalAlignment="Top" Width="124" Height="50" Click="Attendance_Pending_Request_click"/>
 
 
     </Grid>

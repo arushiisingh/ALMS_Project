@@ -21,7 +21,7 @@ namespace ALMSDAL
                 {
                     connection.Open();
                     Console.WriteLine("User type is employee verified");
-                    string command = "Select Employee_ID, Employee_Password, Manager_ID from Employee where Employee_ID = @eId";
+                    string command = "Select Employee_ID, Employee_Password, Manager_ID, Project_ID from Employee where Employee_ID = @eId";
                     SqlCommand sqlCommand = new SqlCommand(command, connection);
                     sqlCommand.Parameters.AddWithValue("@eId", userId);
 
@@ -34,6 +34,7 @@ namespace ALMSDAL
                             if (reader["Employee_Password"].ToString().Equals(password.ToString()))
                             {
                                 LoginEntity.ManagerID = reader["Manager_ID"].ToString();
+                                LoginEntity.ProjectID = int.Parse(reader["Project_ID"].ToString());
                                 return true;
                             }
                             else

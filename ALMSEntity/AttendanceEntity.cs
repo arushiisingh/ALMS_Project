@@ -9,6 +9,7 @@ namespace ALMSEntity
     public class AttendanceEntity
     {
         public int AttendanceID { get; set; }
+        public int ProjectID { get; set; }
         public string AttendanceType { get; set; }
         public DateTime AttendanceDate { get; set; }
         public string InTime { get; set; }

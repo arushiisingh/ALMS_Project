@@ -10,7 +10,7 @@ namespace ALMSEntity
     {
         public static int UserID { get; set; }
         public string UserPassword { get; set; }
-
         public static string ManagerID { get; set; }
+        public static int ProjectID { get; set; }
     }
 }

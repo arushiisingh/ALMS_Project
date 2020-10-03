@@ -31,6 +31,7 @@ namespace ALMSPL
         {
             InitializeComponent();
             txtEmpId.Text = LoginEntity.UserID.ToString();
+            txtPId.Text = LoginEntity.ProjectID.ToString();
             LoadGrid();
         }
 
@@ -44,6 +45,7 @@ namespace ALMSPL
             try
             {
                 attendanceEntity.EmployeeID = int.Parse(txtEmpId.Text);
+                attendanceEntity.ProjectID = int.Parse(txtPId.Text);
                 attendanceEntity.AttendanceType = cmbAType.Text;
                 attendanceEntity.AttendanceDate = txtDate.SelectedDate.Value;
                 attendanceEntity.InTime = txtInTime.Text;
@@ -52,13 +54,14 @@ namespace ALMSPL
 
                 if (attendanceBLL.ValidateAttendanceBLL(attendanceEntity) == true)
                 {
-                    MessageBox.Show("Attendace addedd succesfully");
+                    MessageBox.Show("Attendace Addedd Succesfully!!");
                     //dgAttendance.DataContext = attendanceDAL.LoadGridDAL();
                     LoadGrid();
                 }
                 else
                 {
-                    MessageBox.Show("Something Error.");
+                    MessageBox.Show("Leave Is Already Applied For This Date!!!");
+                    LoadGrid();
                 } 
             }
             catch (Exception ex)
@@ -81,13 +84,12 @@ namespace ALMSPL
 
                 if (attendanceBLL.UpdateAttendanceBLL(attendanceEntity) == true)
                 {
-                    MessageBox.Show("Attendace Updated succesfully");
-                    //dgAttendance.DataContext = attendanceDAL.LoadGridDAL();
+                    MessageBox.Show("Attendace Updated Succesfully!!");
                     LoadGrid();
                 }
                 else
                 {
-                    MessageBox.Show("Something Error.");
+                    MessageBox.Show("Attendance Is Already Approved or Rejected. Cannot Update!!!");
                 }
             }
             catch (Exception ex)
@@ -106,12 +108,12 @@ namespace ALMSPL
                 int AttendaceId = int.Parse(txtAId.Text);
                 if (attendanceBLL.DeleteAttendanceBLL(AttendaceId, LoginEntity.UserID))
                 {
-                    MessageBox.Show("Attendance is deleted successfully.");
+                    MessageBox.Show("Attendance Deleted Successfully!!");
                     LoadGrid();
                 }
                 else
                 {
-                    MessageBox.Show("Attendance not deleted. Error is: ");
+                    MessageBox.Show("Attendance Is Already Approved or Rejected. Cannot Delete!!!");
                 }
             }
             catch (Exception ex)
@@ -128,20 +130,33 @@ namespace ALMSPL
             try
             {
                 int AttendanceID = int.Parse(txtAId.Text);
-
+                string x = "01 - 01 - 0001";
                 searchedAttendanceEntity = attendanceBLL.SearchAttendanceBLL(AttendanceID, LoginEntity.UserID);
-
-                txtEmpId.Text = searchedAttendanceEntity.EmployeeID.ToString();
-                cmbAType.Text = searchedAttendanceEntity.AttendanceType;
-                txtDate.Text =  Convert.ToDateTime(searchedAttendanceEntity.AttendanceDate).ToString();
-                txtInTime.Text = searchedAttendanceEntity.InTime;
-                txtOutTime.Text = searchedAttendanceEntity.OutTime;
+                if(searchedAttendanceEntity.AttendanceDate != Convert.ToDateTime(x))
+                {
+                    MessageBox.Show("Attendance Found!!");
+                    txtEmpId.Text = searchedAttendanceEntity.EmployeeID.ToString();
+                    cmbAType.Text = searchedAttendanceEntity.AttendanceType;
+                    txtDate.Text = Convert.ToDateTime(searchedAttendanceEntity.AttendanceDate).ToString();
+                    txtInTime.Text = searchedAttendanceEntity.InTime;
+                    txtOutTime.Text = searchedAttendanceEntity.OutTime;
+                }
+                else
+                {
+                    MessageBox.Show("Attendance Not Found!!!");
+                }    
             }
             catch (Exception ex)
             {
 
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
+        }
+
+        private void Attendance_Pending_Request_click(object sender, RoutedEventArgs e)
+        {
+            AttendancePendingList attendancePendingList = new AttendancePendingList();
+            attendancePendingList.Show();
         }
     }
 }

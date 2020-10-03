@@ -105,7 +105,7 @@ exec spListProject;
 
 
 --Attendance Module.....................................................................................
-
+drop procedure spAddAttendance
 Create procedure spAddAttendance
 	@Attedance_Type nvarchar(30),
 	@Attedance_Date DATE,
@@ -115,17 +115,20 @@ Create procedure spAddAttendance
 	@Status_Update_Date DATE = NULL,
 	@Status_Updated_By INT = NULL ,
 	@Employee_ID INT,
-	@Manager_ID int =NULL 
+	@Manager_ID int =NULL,
+	@Project_ID int
 AS
 BEGIN
 	SET NOCOUNT OFF;
 	insert into Attendance values(@Attedance_Type, @Attedance_Date, @In_Time, @Out_Time,
-	@Status_Of_Attendance, @Status_Update_Date, @Status_Updated_By, @Employee_ID, @Manager_ID);
+	@Status_Of_Attendance, @Status_Update_Date, @Status_Updated_By, @Employee_ID, @Manager_ID, @Project_ID);
 END
 GO
  
- exec spAddAttendance 'Working From Home','01-10-2020','10:00:00','20:00:00',null,null,1003,null;
+ exec spAddAttendance 'Working From Home','01-10-2020','10:00:00','20:00:00','Pending',null,null,1003,1001,101;
  select * from Attendance;
+
+
 
  /*-------------------------modify attendance------------------------*/
  
@@ -149,9 +152,10 @@ BeGIN
  END
  
  exec spModifyAttendance @Attedance_Type = 'Business Travel', @Attedance_Date = '2020-09-08', 
- @In_Time = '10:30:00', @Out_Time = '17:00:00', @aId = 2, @Employee_ID = 1003;
+ @In_Time = '10:30:00', @Out_Time = '17:00:00', @aId = 3, @Employee_ID = 1003;
 
  select * from Attendance;
+
 
  /*---------------------delete Attendance---------------------------*/
 
@@ -227,6 +231,21 @@ select * from Attendance;
 
 --=======================================================================================
 
+
+CREATE PROCEDURE spLeaveCheck
+	@ADate Date,
+	@eId int
+AS
+BEGIN
+	SET NOCOUNT on;
+	select Employee_ID, Leave_Date_From, Leave_Date_To from Leave where
+	@ADate  between Leave_Date_From and Leave_Date_To and Employee_ID = @eId;
+END
+GO
+exec spLeaveCheck '2020-10-13', 1001;
+select * from Leave
+
+
 --Request Leave
 CREATE PROCEDURE spRequestLeave  
 	@LeaveType NVARCHAR(30),
@@ -251,6 +270,7 @@ Exec spRequestLeave 'm',3,5,'2020-10-12','2020-10-15','Rejected',1004,1001;
 Exec spRequestLeave 'p',1,4,'2020-10-12','2020-10-13','Pending',1002,1001;
 
 select * from leave;
+
 
 
 --Check Status of Leave Request
@@ -486,10 +506,119 @@ exec spLoginAdmin 100001, password;
 
 
 
+CREATE PROCEDURE spListPendingAttendance
+	@mId int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	select * from Attendance where Manager_ID = @mId and Status_OF_Attendance = 'Pending';
+END
+GO
+exec spListPendingAttendance 1001;
+select * from Attendance
+
+
+CREATE PROCEDURE spListApprovedAttendance
+	@mId int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	select * from Attendance where Manager_ID = @mId and Status_OF_Attendance = 'Approved';
+END
+GO
+exec spListApprovedAttendance 1002;
+select * from Attendance
+
+CREATE PROCEDURE spListRejectedAttendance
+	@mId int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	select * from Attendance where Manager_ID = @mId and Status_OF_Attendance = 'Rejected';
+END
+GO
+exec spListRejectedAttendance 1001;
+select * from Attendance
+
+
+CREATE procedure spApproveRejectPendingAttendance
+	@Status_Of_Attendance nvarchar(10),
+	@Status_Update_Date Date,
+	@Status_Updated_By int,
+	@aId int
+
+as 
+BeGIN
+ SET NOCOUNT OFF;
+	update Attendance set Status_Of_Attendance = @Status_Of_Attendance,
+	Status_Update_Date= @Status_Update_Date,
+	Status_Updated_By= @Status_Updated_By
+	where Attendance_ID = @aId;
+ END
+ 
+ exec spApproveRejectPendingAttendance @Status_Of_Attendance = 'Approved', 
+ @Status_Update_Date = '2020-10-03', 
+ @Status_Updated_By = 1001, @aId = 15;
+
+ select * from Attendance;
 
 
 
 
+ 
+CREATE PROCEDURE spListProjectAttendance
+	@pId int,
+	@mid int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	select * from Attendance where @pId = Project_ID and @mid = Manager_ID;
+END
+GO
+
+select * from Attendance
+exec spListProjectAttendance @pId= 103, @mId = 1001;
+
+
+CREATE PROCEDURE spAttendanceSearchByMonth
+@pId int,
+@month int,
+@mId int
+AS
+BEGIN
+SET NOCOUNT OFF;
+select * from Attendance where Project_ID = @pId AND (month(Attedance_Date) = @month) AND Manager_ID = @mId 
+END
+GO
+
+exec spAttendanceSearchByMonth @pId = 101, @mId = 1001, @month = 11;
 
 
 
+CREATE PROCEDURE spAttendanceSearchByDay
+@pId int,
+@day date,
+@mId int
+AS
+BEGIN
+SET NOCOUNT OFF;
+select * from Attendance where Project_ID = @pId AND Attedance_Date = @day AND Manager_ID = @mId 
+END
+GO
+
+exec spAttendanceSearchByDay @pId = 101, @mId = 1001, @day = '2020-10-03';
+
+
+CREATE PROCEDURE spAttendanceSearchBetweenDates
+@mId int,
+@pId int,
+@startDate date,
+@endDate date
+AS
+BEGIN
+SET NOCOUNT OFF;
+select * from Attendance where Manager_ID = @mId and Project_ID = @pId and Attedance_Date between @startDate and @endDate;
+END
+GO
+
+exec spAttendanceSearchBetweenDates 1001,101, '2020/09/01','2020/10/02';

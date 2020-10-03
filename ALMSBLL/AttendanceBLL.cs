@@ -68,10 +68,6 @@ namespace ALMSBLL
             try
             {
                 serchedAttendanceEntity = attendanceDAL.SearchAttendaceDAL(AttendanceID, userId);
-                if (serchedAttendanceEntity == null) {
-                    Console.WriteLine("SomeError");
-                };
-
             }
             catch (Exception e) { throw e; }
             return serchedAttendanceEntity;
@@ -86,6 +82,22 @@ namespace ALMSBLL
         }
 
 
+        public bool ApproveRejectAttendanceBLL(AttendanceEntity attendanceEntity)
+        {
+            bool isUpdated = false;
+            try
+            {
+                isUpdated = attendanceDAL.ApproveRejectAttendanceDAL(attendanceEntity);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return isUpdated;
+        }
+
+
 
         public DataTable LoadGridBLL(int userId)
         {
@@ -93,5 +105,48 @@ namespace ALMSBLL
             return dataTable;
         }
 
+        public DataTable LoadGridARBLL(int userId)
+        {
+            DataTable dataTable = attendanceDAL.LoadGridARDAL(userId);
+            return dataTable;
+        }
+
+        public DataTable LoadGridPABLL(int ProjectID, int userId)
+        {
+            DataTable dataTable = attendanceDAL.LoadGridPADAL(ProjectID, userId);
+            return dataTable;
+        }
+
+        public DataTable LoadGridPAMBLL(int ProjectID, int Month, int userId)
+        {
+            DataTable dataTable = attendanceDAL.LoadGridPAMDAL(ProjectID, Month, userId);
+            return dataTable;
+        }
+
+        public DataTable LoadGridPADBLL(int ProjectID, DateTime Date, int userId)
+        {
+            DataTable dataTable = attendanceDAL.LoadGridPADDAL(ProjectID, Date, userId);
+            return dataTable;
+        }
+
+        public DataTable LoadGridPABDBLL(int ProjectID, DateTime FromDate, DateTime ToDate, int userId)
+        {
+            DataTable dataTable = attendanceDAL.LoadGridPABDDAL(ProjectID, FromDate, ToDate, userId);
+            return dataTable;
+        }
+
+
+
+        public DataTable LoadGridApprovedAttendanceBLL(int userId)
+        {
+            DataTable dataTable = attendanceDAL.LoadGridApprovedAttendanceDAL(userId);
+            return dataTable;
+        }
+
+        public DataTable LoadGridRejectedAttendanceBLL(int userId)
+        {
+            DataTable dataTable = attendanceDAL.LoadGridRejectedAttendanceDAL(userId);
+            return dataTable;
+        }
     }
 }

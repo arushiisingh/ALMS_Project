@@ -258,9 +258,9 @@ BEGIN
 END
 GO
 
-exec spAttendanceAlreadyAppliedCheck '2020-10-02', 1003;
+exec spAttendanceAlreadyAppliedCheck '2020-10-03', 1003;
 select * from Attendance;
-
+select * from Leave;
 
 
 

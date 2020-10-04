@@ -1,0 +1,41 @@
+﻿<Window x:Class="ALMSPL.EmployeeLeaveRequestPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ALMSPL"
+        mc:Ignorable="d"
+        Title="EmployeeLeaveRequestPage" Height="450" Width="800">
+    <Grid>
+        <Label Content="Leave" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="84" FontSize="24" FontWeight="Bold"/>
+        <Label Name="lblLeaveId" Content="Leave Id :" HorizontalAlignment="Left" Margin="374,66,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Manager Id :" HorizontalAlignment="Left" Margin="374,117,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Employee Id :" HorizontalAlignment="Left" Margin="68,66,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Leave Date From :" HorizontalAlignment="Left" Margin="68,164,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.558,1.215"/>
+        <Label Content="Leave Date To :" HorizontalAlignment="Left" Margin="374,164,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Leave Balance :" HorizontalAlignment="Left" Margin="68,117,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="No of Days :" HorizontalAlignment="Left" Margin="374,207,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.488,-0.118"/>
+        <Label Content="Leave Type :" HorizontalAlignment="Left" Margin="68,207,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="txtLeaveId" HorizontalAlignment="Left" Height="23" Margin="493,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FF05070C" BorderThickness="0,0,0,1" RenderTransformOrigin="0.815,0.435" TextChanged="txtLeaveId_TextChanged"/>
+        <TextBox x:Name="txtNoOfDays" HorizontalAlignment="Left" Height="23" Margin="493,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FF05070C" BorderThickness="0,0,0,1" TextChanged="txtNoOfDays_TextChanged"/>
+        <TextBox x:Name="txtEmployeeId" HorizontalAlignment="Left" Height="23" Margin="197,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FF05070C" BorderThickness="0,0,0,1" TextChanged="txtEmployeeId_TextChanged"/>
+        <TextBox x:Name="txtManagerId" HorizontalAlignment="Left" Height="23" Margin="493,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FF05070C" BorderThickness="0,0,0,1" TextChanged="txtManagerId_TextChanged"/>
+        <TextBox x:Name="txtLeaveBalance" HorizontalAlignment="Left" Height="23" Margin="197,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FF05070C" BorderThickness="0,0,0,1" RenderTransformOrigin="0.815,0.435" TextChanged="txtLeaveBalance_TextChanged"/>
+        <ComboBox Name="txtLeaveType" HorizontalAlignment="Left" Margin="197,213,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Emergency"/>
+            <ComboBoxItem Content="Sick leave"/>
+            <ComboBoxItem Content="Casual leave"/>
+            <ComboBoxItem Content="Maternity leave"/>
+            <ComboBoxItem Content="Paternity leave"/>
+            <ComboBoxItem Content="Unpaid Leave"/>
+        </ComboBox>
+        <Button x:Name="LeaveRequestbtn" Content="Add New Leave" HorizontalAlignment="Left" Margin="68,290,0,0" VerticalAlignment="Top" Width="150" Height="38" Click="LeaveRequestbtn_Click" Background="#FF3CC733" FontSize="18" FontWeight="Bold"/>
+        <DatePicker Name="LeaveDateFrom" HorizontalAlignment="Left" Margin="215,167,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="LeaveDateTo" HorizontalAlignment="Left" Margin="493,164,0,0" VerticalAlignment="Top"  SelectedDateChanged="LeaveDateTo_SelectedDateChanged"/>
+        <Button x:Name="LeaveUpdate" Content="Update Leave" HorizontalAlignment="Left" Margin="309,279,0,0" VerticalAlignment="Top" Width="150" Height="38" Click="UpdateLeavebtn_Click" Background="#FF3CC733" FontSize="18" FontWeight="Bold"/>
+        <Button x:Name="Delete_Leave" Content="Delete Leave" HorizontalAlignment="Left" Margin="554,279,0,0" VerticalAlignment="Top" Width="150" Height="38" Click="DeleteLeavebtn_Click" Background="#FF3CC733" FontSize="18" FontWeight="Bold"/>
+        <Button x:Name="Search_Leave" Content="Search Leave" HorizontalAlignment="Left" Margin="460,15,0,0" VerticalAlignment="Top" Width="118" Height="27" Click="SearchLeavebtn_Click" Background="#FF3CC733" FontSize="18" FontWeight="Bold"/>
+        <TextBox x:Name="txtLeaveId_Search" HorizontalAlignment="Left" Height="23" Margin="602,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FF05070C" BorderThickness="0,0,0,1" RenderTransformOrigin="0.815,0.435" TextChanged="txtLeaveId_Search_TextChanged" />
+
+    </Grid>
+</Window>

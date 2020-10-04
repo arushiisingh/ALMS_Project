@@ -8,7 +8,9 @@ namespace ALMSDAL
 {
     static class DALStatic
     {
+
        public static string connectionString = @"Data Source=LAPTOP-CB16IGOF\SQLEXPRESS;Initial Catalog=Project_DB;Integrated Security=True";
+
 
     }
 }

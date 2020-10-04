@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ALMSBLL;
+using ALMSEntity;
+using ALMSExceptions;
+
 
 namespace ALMSPL
 {
@@ -19,18 +23,47 @@ namespace ALMSPL
     /// </summary>
     public partial class EmployeeHomePage : Window
     {
+        LoginEntity loginEntity = new LoginEntity();
+        LoginBLL loginBLL = new LoginBLL();
         public EmployeeHomePage()
         {
             InitializeComponent();
+            this.Loaded += new RoutedEventHandler(Window_Loaded);
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            EmployeeNameLabel.Content = EmployeeEntity.EmployeeName.ToString();
+        }
 
         private void Attedance_Button_Click(object sender, RoutedEventArgs e)
         {
             AddAttendance addAttendancePage = new AddAttendance();
             this.Close();
             addAttendancePage.AttendanceApproveRejectBtn.Visibility = Visibility.Hidden;
-            addAttendancePage.Show();
+            addAttendancePage.Show(); 
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
+
+        private void ProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void LeaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeLeaveDetailsPL leaveDetailsPL = new EmployeeLeaveDetailsPL();
+            this.Close();
+            leaveDetailsPL.LeaveAproveRejectBtn.Visibility = Visibility.Hidden;
+            leaveDetailsPL.Show();
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ALMSDAL;
+
 using ALMSEntity;
 using System.Text.RegularExpressions;
 using System.Data;
@@ -146,7 +148,13 @@ namespace ALMSBLL
         public DataTable LoadGridRejectedAttendanceBLL(int userId)
         {
             DataTable dataTable = attendanceDAL.LoadGridRejectedAttendanceDAL(userId);
-            return dataTable;
+//=======
+//        AttedanceDAL attendanceDAL = new AttedanceDAL();
+//        public DataTable LoadGridAttendanceBLL()
+//        {
+//            DataTable dataTable = attendanceDAL.LoadGridAttedanceDAL();
+//>>>>>>> pr/3
+//            return dataTable;
         }
     }
 }

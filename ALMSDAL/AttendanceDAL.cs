@@ -18,8 +18,10 @@ namespace ALMSDAL
             bool isAttendanceAdded = false;
             try
             {
-                connection.Open();
+                int y = 1;
+                int z = 1;
 
+                connection.Open();
                 string command = "spLeaveCheck";
                 SqlCommand sqlCommand = new SqlCommand(command, connection);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -28,7 +30,7 @@ namespace ALMSDAL
                 sqlCommand.Parameters.AddWithValue("@eId", attendanceEntity.EmployeeID);
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
-                int y = 1;
+
                 if (reader.Read())
                 {
                     y = 0; 
@@ -38,7 +40,25 @@ namespace ALMSDAL
                     connection.Close();
                 }
 
-                if (y == 1)
+                connection.Open();
+                string command2 = "spAttendanceAlreadyAppliedCheck";
+                SqlCommand sqlCommand2 = new SqlCommand(command2, connection);
+                sqlCommand2.CommandType = CommandType.StoredProcedure;
+                string date = attendanceEntity.AttendanceDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                sqlCommand2.Parameters.AddWithValue("@ADate", date);
+                sqlCommand2.Parameters.AddWithValue("@eId", attendanceEntity.EmployeeID);
+                SqlDataReader reader1 = sqlCommand2.ExecuteReader();
+
+                if (reader1.Read())
+                {
+                    z = 0;
+                }
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+                if (y == 1 && z == 1)
                 {
                     if (LoginEntity.ProjectID == attendanceEntity.ProjectID)
                     {
@@ -64,7 +84,6 @@ namespace ALMSDAL
                         }
                         else
                         {
-                            Console.WriteLine("Project Code doesn't match.");
                             isAttendanceAdded = false;
                         }
                     }
@@ -89,10 +108,14 @@ namespace ALMSDAL
                             }
                             else
                             {
-                                Console.WriteLine("Error Found");
                                 isAttendanceAdded = false;
                             }
                     }
+                }
+
+                else if(y ==1 && z == 0)
+                {
+                    Console.WriteLine("Attendance is already applied");
                 }
                 else
                 {

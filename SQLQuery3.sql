@@ -29,7 +29,7 @@ CREATE TABLE Employee(
 insert into Employee  Values('Amar', 'amarp@gmail.com','8989789168','Analyst','Active','password',null,101);
 insert into Employee  Values('Amar  Kumar', 'apoddark@gmail.com','838849568','Analyst A4','Inactive','pass',1001,102);
 insert into Employee  Values('Amar  Kumar POddar', 'akppoddar@gmail.com','8358849568','Analyst A5','Active','passw',1001,101);
-insert into Employee  Values('Amar AP', 'ap@gmail.com','8252849568','Analyst A4','Active','passw',1001,102);
+insert into Employee  Values('Amar AP', 'ap@gmail.com','8262849568','Analyst A4','Active','passw',1002,101);
 
 select * from Employee;
 

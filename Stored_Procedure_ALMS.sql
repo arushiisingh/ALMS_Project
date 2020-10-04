@@ -246,6 +246,24 @@ exec spLeaveCheck '2020-10-13', 1001;
 select * from Leave
 
 
+
+CREATE PROCEDURE spAttendanceAlreadyAppliedCheck
+	@ADate Date,
+	@eId int
+AS
+BEGIN
+	SET NOCOUNT on;
+	select Employee_ID from Attendance where
+	Attedance_Date = @ADate and Employee_ID = @eId;
+END
+GO
+
+exec spAttendanceAlreadyAppliedCheck '2020-10-02', 1003;
+select * from Attendance;
+
+
+
+
 --Request Leave
 CREATE PROCEDURE spRequestLeave  
 	@LeaveType NVARCHAR(30),
@@ -622,3 +640,6 @@ END
 GO
 
 exec spAttendanceSearchBetweenDates 1001,101, '2020/09/01','2020/10/02';
+
+
+

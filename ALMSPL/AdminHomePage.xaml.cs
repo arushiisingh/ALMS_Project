@@ -23,5 +23,26 @@ namespace ALMSPL
         {
             InitializeComponent();
         }
+
+       
+       
+
+        private void ProjectDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EmployeeButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminSideEmployeeDetailsPL AdminSidemployeeDetailsPage = new AdminSideEmployeeDetailsPL();
+            
+            AdminSidemployeeDetailsPage.Show();
+        }
+
+        private void ProjectManagerButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminSideViewProjectManager adminSideViewProjectManager = new AdminSideViewProjectManager();
+            adminSideViewProjectManager.Show();
+        }
     }
 }

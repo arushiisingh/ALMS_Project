@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ALMSEntity
 {
-    class LoginEntity
+     public class LoginEntity
     {
-        public int EmployeeID { get; set; }
-        public string EmployeePassword { get; set; }
+        public static int UserID { get; set; }
+        public string UserPassword { get; set; }
     }
 }

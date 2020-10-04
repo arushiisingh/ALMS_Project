@@ -8,8 +8,8 @@ namespace ALMSEntity
 {
     public class AdminEntity
     {
-        public int AdminId { get; set; }
-        public string AdminName { get; set; }
-        public string Password { get; set; }
+        public static int AdminId { get; set; }
+        public static string AdminName { get; set; }
+        public static string Password { get; set; }
     }
 }

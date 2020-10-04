@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="ManagerHomePage" Height="450" Width="800">
     <Grid Background="#FF8CB6C3">
-        <Label Content="Welcome..Manager Home Page" HorizontalAlignment="Left" Margin="230,127,0,0" VerticalAlignment="Top" Height="108" Width="447" FontSize="24"/>
-        <Button Content="Project" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="113" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="Button_Click_1"/>
-        <Button Content="Attendance" HorizontalAlignment="Left" Margin="229,10,0,0" VerticalAlignment="Top" Width="203" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="Button_Click"/>
-        <Button Content="Leave" HorizontalAlignment="Left" Margin="539,10,0,0" VerticalAlignment="Top" Width="203" Height="43" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="Button_Click_2"/>
+        <Label Name="Manager_Name" Content="Welcome..Manager Home Page" HorizontalAlignment="Left" Margin="571,10,0,0" VerticalAlignment="Top" Height="41" Width="213" FontSize="24"/>
+        <Button Content="Project" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top" Width="196" Height="101" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="Button_Click_1"/>
+        <Button Content="Attendance" HorizontalAlignment="Left" Margin="289,66,0,0" VerticalAlignment="Top" Width="212" Height="102" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="Button_Click"/>
+        <Button Content="Leave" HorizontalAlignment="Left" Margin="571,67,0,0" VerticalAlignment="Top" Width="191" Height="102" FontSize="24" Background="#FF59B730" BorderBrush="#FF370909" Click="LeaveButton_Click"/>
 
     </Grid>
 </Window>

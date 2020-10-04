@@ -68,7 +68,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdminSideAddEmployeePL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminSideEmployeeDetailsPL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminSideViewPendingAttendence.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminSideViewPendingLeavesPL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminSideViewProjectManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EmployeeHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployeeLeaveDetailsPL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployeeLeaveRequestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -79,6 +107,21 @@
     <Compile Include="AdminHomePage.xaml.cs">
       <DependentUpon>AdminHomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminSideAddEmployeePL.xaml.cs">
+      <DependentUpon>AdminSideAddEmployeePL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSideEmployeeDetailsPL.xaml.cs">
+      <DependentUpon>AdminSideEmployeeDetailsPL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSideViewPendingAttendence.xaml.cs">
+      <DependentUpon>AdminSideViewPendingAttendence.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSideViewPendingLeavesPL.xaml.cs">
+      <DependentUpon>AdminSideViewPendingLeavesPL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSideViewProjectManager.xaml.cs">
+      <DependentUpon>AdminSideViewProjectManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -86,16 +129,29 @@
     <Compile Include="EmployeeHomePage.xaml.cs">
       <DependentUpon>EmployeeHomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeLeaveDetailsPL.xaml.cs">
+      <DependentUpon>EmployeeLeaveDetailsPL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeLeaveRequestPage.xaml.cs">
+      <DependentUpon>EmployeeLeaveRequestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ManagerApproveRejectLeavePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ManagerHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ManagerApproveRejectLeavePage.xaml.cs">
+      <DependentUpon>ManagerApproveRejectLeavePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManagerHomePage.xaml.cs">
       <DependentUpon>ManagerHomePage.xaml</DependentUpon>
     </Compile>

@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ALMSBLL;
+using ALMSEntity;
+using ALMSExceptions;
+
 
 namespace ALMSPL
 {
@@ -22,16 +25,16 @@ namespace ALMSPL
     public partial class MainWindow : Window
     {
         LoginBLL loginBLL = new LoginBLL();
+        LoginEntity loginEntity = new LoginEntity();
+        ALMSException ALMSexception = new ALMSException();
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        AdminEntity adminEntity = new AdminEntity();
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void txtUserId_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+       
         private void rbtnAdmin_Checked(object sender, RoutedEventArgs e)
         {
 
@@ -67,9 +70,28 @@ namespace ALMSPL
                 
                 if (validateLogin)
                 {
+                    LoginEntity.UserID = userId;
+                    loginEntity.UserPassword = password;
+
                     if (user == "Employee")
                     {
                         bool isManager = loginBLL.IsManagerBLL(userId);
+
+                        bool addEmployeeDetails = AddEmployeeDetails(userId);
+                            /*  // this is only for checking purpose that employee details added on class
+                        if(addEmployeeDetails)
+                        {
+                            ///MessageBox.Show("Employee details added success");
+                            Console.WriteLine("emp add details");
+                            Console.WriteLine(EmployeeEntity.ProjectID);
+                            Console.WriteLine(EmployeeEntity.EmployeeStatus);
+                            Console.WriteLine(EmployeeEntity.EmployeeName);
+                            Console.WriteLine(EmployeeEntity.EmployeeEmail);
+                        }
+                        else
+                        {
+                            MessageBox.Show("employee details not fatched");
+                        }*/
 
                         if (isManager)
                         {
@@ -86,6 +108,8 @@ namespace ALMSPL
                     }
                     else if (user == "Admin")
                     {
+                        bool addAdminDetails = AddAdminDetails(userId);
+
                         AdminHomePage adminHomePage = new AdminHomePage();
                         this.Close();
                         adminHomePage.Show();
@@ -103,6 +127,36 @@ namespace ALMSPL
             catch(Exception)
             {
                 MessageBox.Show("Something went wrong....please try again ");
+            }
+        }
+
+
+        public bool AddEmployeeDetails(int UserId)
+        {
+            EmployeeEntity.EmployeeID = UserId;
+            bool addEmployeeEntity =loginBLL.AddEmployeeEntityBLL(EmployeeEntity.EmployeeID);
+            if (addEmployeeEntity)
+            {
+                return true;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool AddAdminDetails(int userId)
+        {
+            AdminEntity.AdminId = userId;
+            bool addAdminEntity = loginBLL.AddAdminEntityBLL(userId);
+            if (addAdminEntity)
+            {
+               // MessageBox.Show("Admin added succes");
+                return true;
+            }
+            else
+            {
+                return true;
             }
         }
     }

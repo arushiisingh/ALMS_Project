@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace ALMSEntity
 {
-    class LeaveEntity
+    public class LeaveEntity
     {
-        public int LeaveRequestID { get; set; }
-        public string LeaveType { get; set; }
-        public int NoOfDays { get; set; }
-        public int LeaveBalance { get; set; }
-        public DateTime Leave_Date_From { get; set; }
-        public DateTime LeaveDateTo { get; set; }
-        public string LeaveStatus { get; set; }
-        public int EmployeeID { get; set; }
-        public int ManagerID { get; set; }
+        public static int LeaveRequestID { get; set; }
+        public static string LeaveType { get; set; }
+        public static int NoOfDays { get; set; }
+        public static int LeaveBalance { get; set; }
+        public static DateTime Leave_Date_From { get; set; }
+        public static DateTime LeaveDateTo { get; set; }
+        public static string LeaveStatus { get; set; }
+        public static int EmployeeID { get; set; }
+        public static int ManagerID { get; set; }
     }
 }

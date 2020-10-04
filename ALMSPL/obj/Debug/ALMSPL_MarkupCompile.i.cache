@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Capgemini\Project\Attendance and Leave Management\AttendanceLeaveMgmt\final project\ALMS_Project\ALMSPL\App.xaml
-4820529798
+121171595834
 
-9-1161837409
+17-1008143830
 161034004842
-AdminHomePage.xaml;EmployeeHomePage.xaml;MainWindow.xaml;ManagerHomePage.xaml;
+AdminHomePage.xaml;AdminSideAddEmployeePL.xaml;AdminSideEmployeeDetailsPL.xaml;AdminSideViewPendingAttendence.xaml;AdminSideViewPendingLeavesPL.xaml;AdminSideViewProjectManager.xaml;EmployeeHomePage.xaml;EmployeeLeaveDetailsPL.xaml;EmployeeLeaveRequestPage.xaml;MainWindow.xaml;ManagerApproveRejectLeavePage.xaml;ManagerHomePage.xaml;
 
-False
+True
 

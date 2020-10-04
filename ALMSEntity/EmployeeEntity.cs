@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace ALMSEntity
 {
-    class EmployeeEntity
+     public class EmployeeEntity
     {
-        public int EmployeeID { get; set; }
-        public string EmployeePassword { get; set; }
-        public string EmployeeName { get; set; }
-        public string EmployeeEmail { get; set; }
-        public long EmployeePhoneNumber { get; set; }
-        public string EmployeeRole { get; set; }
-        public int ManagerID { get; set; }
-        public int ProjectID { get; set; }
+        public static int EmployeeID { get; set; }
+        public static string EmployeePassword { get; set; }
+        public static string EmployeeName { get; set; }
+        public static string EmployeeEmail { get; set; }
+        public static long EmployeePhoneNumber { get; set; }
+        public static string EmployeeRole { get; set; }
+        public static string EmployeeStatus { get; set; }
+        public static int ManagerID { get; set; }
+        public static int ProjectID { get; set; }
     }
 }

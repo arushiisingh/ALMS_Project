@@ -22,6 +22,22 @@ namespace ALMSBLL
             bool isManager = loginDAL.IsManagerDAL(userId);
             return isManager;
         }
+
+      
+
+        public bool AddEmployeeEntityBLL(int employeeID)
+        {
+            bool addEmployeeEntity =loginDAL.AddEmployeeEntityDAL(employeeID);
+            return addEmployeeEntity;
+        }
+
+        public bool AddAdminEntityBLL(int employeeID)
+        {
+            bool addEmployeeEntity = loginDAL.AddAdminEntityDAL(employeeID);
+            return addEmployeeEntity;
+        }
+
+
     }
 
     
